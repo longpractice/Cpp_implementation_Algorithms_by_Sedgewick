@@ -264,25 +264,55 @@ class TStack
 {
 public:
 	TStack() = default;
+	TStack(u32 capacity) { reserve(capacity); }
 	virtual ~TStack()
 	{
 		clear();
 	};
 
-	int m_size{ 0 };
+	u32 m_size{ 0 };
+	u32 m_capacity{ 0 };
 
 	T* m_pData{ nullptr };
+	void reserve(capacity)
+	{
+		if (capacity > m_capacity)
+		{		
+			auto pNewData = new T[capacity];
+			m_capacity = capacity;
+			if(m_pData) // we have old data
+			{
+				//copy old to new place
+				for (u32 i = 0; i < m_size; i++)
+				{
+					pNewData[i] = std::move(m_pData[i]);
+				}
+				delete[] m_pData;
+			}
+			m_pData = pNewData;
+		}
+	}
 
 	int size() { return m_size; };
 	bool isEmpty() { return m_size == 0; };
 
 	T pop()
 	{
+		if (isEmpty())
+			throw("Nothing to pop.");
+		auto tmp = std::move(m_pData[m_size]);
+		m_size--;
+		return tmp;
 	}
 
 	// this function returns returns 0 if found(will not put it as duplicate) and return 1 if insert
-	void push(T val)
-	{}
+	void push(T&& val)
+	{
+		if (m_capacity <= m_size + 1)
+			reserve((m_size + 1) * 2);
+		
+
+	}
 
 
 
