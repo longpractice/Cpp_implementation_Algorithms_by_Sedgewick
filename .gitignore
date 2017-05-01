@@ -19,3 +19,6 @@ _ReSharper*/
 ipch/
 *.opendb
 *.sdf
+*.db
+*.db-wal
+*.db-shm

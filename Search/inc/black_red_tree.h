@@ -8,6 +8,92 @@
 #ifndef BLACK_RED_TREE_H_
 #define BLACK_RED_TREE_H_
 
+template<typename T>
+struct TTreeNode
+{
+	T val{ 0 };
+	TTreeNode<T>* pLeft{ nullptr };
+	TTreeNode<T>* pRight{ nullptr };
+};
+
+template<typename T>
+inline bool Is_tree_balanced(const TTreeNode<T>& root)
+{
+	return maxDepth(&root) - minDepth(&root) <= 1;
+}
+
+template<typename T>
+inline unsigned int minDepth(const TTreeNode<T>* pRoot)
+{
+	if (!pRoot)
+		return 0;
+	unsigned int left_min = minDepth(pRoot->pLeft);
+	unsigned int right_min = minDepth(pRoot->pRight);
+	return (left_min < right_min ? left_min : right_min) + 1;
+}
+
+template<typename T>
+inline unsigned int maxDepth(const TTreeNode<T>* pRoot)
+{
+	if (!pRoot)
+		return 0;
+	unsigned int left_max = maxDepth(pRoot->pLeft);
+	unsigned int right_max = maxDepth(pRoot->pRight);
+	return (left_max > right_max ? left_max : right_max) + 1;
+}
+
+// for start
+template<typename T, unsigned int N>
+TTreeNode<T>* array_to_min_height_tree(const T(&data)[N])
+{
+	return array_to_min_height_tree(data, 0, N - 1);
+}
+
+//for recursion
+template<typename T, unsigned int N>
+TTreeNode<T>* array_to_min_height_tree(const T(&data)[N], int begin, int end)
+{
+	if (begin > end)
+		return nullptr;
+	auto pRoot = new TTreeNode<T>;
+	int mid = begin + (end - begin) / 2 + (end - begin) % 2;
+	pRoot->val = data[mid];
+	pRoot->pLeft = array_to_min_height_tree(data, begin, mid - 1);
+	pRoot->pRight = array_to_min_height_tree(data, mid + 1, end);
+	return pRoot;
+}
+
+template<typename T>
+inline vector<vector<T>> tree_to_depths_vectors(const TTreeNode<T>* pRoot)
+{
+	vector<vector<T>> res;
+	tree_to_depths_vectors(pRoot, res, 0);
+	return res;
+}
+
+template<typename T>
+inline void tree_to_depths_vectors(const TTreeNode<T>* pRoot, vector<vector<T>>& res, int depth)
+{
+	if (!(pRoot))
+		return;
+
+	if (res.size() <= depth)
+		res.resize(depth + 1);
+
+	res[depth].emplace_back(pRoot->val);
+	tree_to_depths_vectors(pRoot->pRight, res, depth + 1);
+	tree_to_depths_vectors(pRoot->pLeft, res, depth + 1);
+}
+
+
+
+
+
+template<typename T>
+inline TTreeNode<T>* find_successor_binary_search_tree
+{
+}
+
 template<typename TKey, typename TVal>
 class TBlack_Red_Tree
 {

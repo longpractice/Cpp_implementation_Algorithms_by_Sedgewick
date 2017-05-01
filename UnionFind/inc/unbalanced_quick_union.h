@@ -10,11 +10,13 @@
 
 #include <memory>
 #include "types.h"
-class TQuickUnionUF
+
+// this Union is Quick? unbalanced
+class TUnbalancedUnion
 {
 public:
-	TQuickUnionUF(){};
-	virtual ~TQuickUnionUF(){};
+	TUnbalancedUnion(){};
+	virtual ~TUnbalancedUnion(){};
 	void Init(u32 _nSites)
 	{
 		m_n_sites = _nSites;
@@ -37,6 +39,7 @@ public:
 		return Find(_site_p) == Find(_site_q);
 	}
 
+	// connect two sizes
 	// return whether they are connected already
 	bool Union(u32 _site_p, u32 _site_q)
 	{

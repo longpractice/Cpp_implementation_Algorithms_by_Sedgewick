@@ -23,7 +23,6 @@
 #include "stdafx.h"
 #include <type_traits>
 #include <string>
-#include "inc/YangHelpers.h"
 using namespace std;
 
 
@@ -36,7 +35,6 @@ using namespace std;
 int main()
 {
 	char some1[] = "abcd";
-	reverse_str(some1);
 	std::cout << "Hello world";
 	int volatile dummy = 1;
 

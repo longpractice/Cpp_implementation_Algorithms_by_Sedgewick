@@ -8,8 +8,7 @@
 
 #include <iostream>
 #include "../inc/weighted_quick_union.h"
-#include "../inc/quick_find.h"
-#include "../inc/quick_union.h"
+#include "../inc/unbalanced_quick_union.h"
 #include <windows.h>
 
 int main() {
@@ -18,7 +17,7 @@ int main() {
 	auto tick1 = GetTickCount();
 	//TWeightedQuickUnionUF aUnion;
 	//TQuickFindUF aUnion;
-	TQuickUnionUF aUnion;
+	TUnbalancedUnion aUnion;
 	aUnion.Init(size);
 	u32 p, q;
 	while((std::cin >> p) && (std::cin >> q))
