@@ -1,52 +1,66 @@
 // ConsoleApplication2.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-#include <string>
+#include<vector>
 #include <iostream>
-#include <Sort/inc/insertionSort.h>
-#include <type_traits>
-#include "YangHelpers.h"
-#include "StringHelpers.h"
-#include "Stack.h"
-#include <Search/inc/seq_search_unordered_map.h>
-#include <Graph/Graph.h>
+int cnt = 0;
+struct intx
+{
+	intx() {};
+	intx(int i) : m(i) {};
+	int m;
+	bool operator<(const intx &b) const
+	{
+		++cnt;
+		if (m < b.m)
+			return true;
+		else
+			return false;
+	}
+};
 
-#include <Search/inc/black_red_tree.h>
-using namespace std;
+
+
 
 template<typename T>
-inline vector<vector<T>> tree_to_depths_vectors(const TTreeNode<T>* pRoot)
+int find_in_vector(const std::vector<T> &vec, const T &val)
 {
-	vector<vector<T>> res;
-	tree_to_depths_vectors(pRoot, res, 0);
-	return res;
+	if (vec.size() == 0) //cannot find in an empty vector
+		return -1;
+
+	int size = vec.size();
+	int len = size; //length of the range
+	int half = 0; //half of the length
+	int begin = 0; // begin of the range
+	while (len > 0)
+	{
+		half = len >> 1; //binary search
+		if(vec[begin + half] < val) //must be in the right half(excluding half)
+		{
+			len -= half + 1;
+			begin += half + 1;
+		}
+		else // in the left half, but the middle could be picked later
+			len = half;
+	}
+
+	//we have found a lower bound, now compare it with the value
+	if (begin == size || val < vec[begin])
+		return -1;
+
+	return begin;
 }
 
-template<typename T>
-inline void tree_to_depths_vectors(const TTreeNode<T>* pRoot, vector<vector<T>>& res, int depth)
-{
-	if (!(pRoot))
-		return;
-
-	if (res.size() <= depth)
-		res.resize(depth + 1);
-
-	res[depth].emplace_back(pRoot->val);
-	tree_to_depths_vectors(pRoot->pRight, res, depth + 1);
-	tree_to_depths_vectors(pRoot->pLeft, res, depth + 1);
-}
-
-extern int x;
 int main()
 {
-	int data[8] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-	auto pRoot = array_to_min_height_tree(data);
-	
-	auto res = tree_to_depths_vectors(pRoot);
+	std::vector<intx> vec(200000, 0);
+	for (int i = 0; i < 200000; i++)
+	{
+		vec[i] = intx{ i };
+	}
+	auto res = find_in_vector(vec, intx{ 190000 });
+	std::cout << res << " " << cnt << std::endl;
 
-	bool isBalanced = Is_tree_balanced(*pRoot);
-	//auto min = minDepth(&root);
-	while (1);
+	while (1)
+		continue;
 }
-

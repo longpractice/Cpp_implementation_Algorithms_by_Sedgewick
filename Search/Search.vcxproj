@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="binary_search.h" />
     <ClInclude Include="inc\binary_search_ordered_map.h" />
     <ClInclude Include="inc\binary_search_tree.h" />
     <ClInclude Include="inc\black_red_tree.h" />

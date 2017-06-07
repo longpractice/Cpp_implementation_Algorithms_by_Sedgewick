@@ -1,6 +1,7 @@
 #pragma once
 #include"int_types_with_width.h"
 #include "StringHelpers.h"
+#include <set>
 /*
 * rotate an array with dimension N*N,
 * this is done basically in place, so it does not require much more space

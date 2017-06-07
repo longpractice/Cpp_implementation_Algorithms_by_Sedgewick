@@ -8,6 +8,7 @@
 #ifndef MERGESORT_H_
 #define MERGESORT_H_
 
+#include <map>
 template <class T>
 static inline void merge(T* _array, T* _aux, int _lo, int _mi, int _hi)
 {

@@ -63,36 +63,10 @@ TTreeNode<T>* array_to_min_height_tree(const T(&data)[N], int begin, int end)
 	return pRoot;
 }
 
-template<typename T>
-inline vector<vector<T>> tree_to_depths_vectors(const TTreeNode<T>* pRoot)
-{
-	vector<vector<T>> res;
-	tree_to_depths_vectors(pRoot, res, 0);
-	return res;
-}
-
-template<typename T>
-inline void tree_to_depths_vectors(const TTreeNode<T>* pRoot, vector<vector<T>>& res, int depth)
-{
-	if (!(pRoot))
-		return;
-
-	if (res.size() <= depth)
-		res.resize(depth + 1);
-
-	res[depth].emplace_back(pRoot->val);
-	tree_to_depths_vectors(pRoot->pRight, res, depth + 1);
-	tree_to_depths_vectors(pRoot->pLeft, res, depth + 1);
-}
 
 
 
 
-
-template<typename T>
-inline TTreeNode<T>* find_successor_binary_search_tree
-{
-}
 
 template<typename TKey, typename TVal>
 class TBlack_Red_Tree
@@ -235,12 +209,14 @@ public:
 	{
 		if (!pRoot) // this is a empty node, put it here
 			return makeNode(key, val, RED);
+
 		if (key < *pRoot->pKey)
 			pRoot->pLeft = put(pRoot->pLeft, key, val); // put it on the left
 		else if (key > *pRoot->pKey)
 			pRoot->pRight = put(pRoot->pRight, key, val); // put it on the right sub tree
 		else    // replace the current node
 			pRoot->set(key, val);
+
 		if (isRed(pRoot->pRight))
 			pRoot = rotateLeft(pRoot);
 		if (isRed(pRoot->pLeft) && isRed(pRoot->pLeft->pLeft))
