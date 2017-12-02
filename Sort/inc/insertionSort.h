@@ -8,8 +8,18 @@
 #ifndef INSERTIONSORT_H_
 #define INSERTIONSORT_H_
 
-//insertion sort is especially good for partially sorted array
-template <class T>
+/*
+Insertion sort is kind-of dynamic algorithm, with O(n^2) time, property: 
+
+Online, it can sort a list as it receives it
+Stable, keep order if equal
+In place, swap is enough
+
+Insertion sort always keep the first k elements sorted. 
+The (k+1)th element will be inserted in the first k element at the right position so then k+1 elements will be sorted 
+insertion sort is especially good for partially sorted array. It is similar to but better than bubble sort almost in any aspect.
+*/
+template <typename T>
 static inline void insertionSort(T* _pVal, int _size)
 {
 	for (int iStart = 1; iStart < _size; iStart++)
@@ -19,7 +29,11 @@ static inline void insertionSort(T* _pVal, int _size)
 
 };
 
-template <class T>
+
+/*
+	When swaping is expensive, we should be able to directly insert the (k+1)th element at the correct location
+*/
+template <typename T>
 static inline void insertionSortEfficient(T* _pVal, int _size)
 {
 	// this method is more efficient because it directly exchange with the one which should be promoted.

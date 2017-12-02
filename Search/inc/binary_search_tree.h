@@ -182,7 +182,7 @@ private:
 				cleanNode(pRoot); //delete current node
 				return tmp;
 			}
-			if (!pRoot->pRight)// if the left is empty, we have to put right up
+			if (!pRoot->pRight)// if right is empty, we have to put right up
 			{
 				auto tmp = pRoot->pLeft;
 				cleanNode(pRoot); //delete current node

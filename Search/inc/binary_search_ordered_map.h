@@ -7,6 +7,8 @@
 #ifndef BINARY_SEARCH_ORDERED_MAP_H_
 #define BINARY_SEARCH_ORDERED_MAP_H_
 
+// This is the binary search version(using dynamic array as underlining container) of map
+// It does not have efficient insertion and deletion, it is only efficient for searching
 template<typename TKey, typename TVal>
 class TBinary_Search_Ordered_Map
 {

@@ -9,6 +9,16 @@
 #define MERGESORT_H_
 
 #include <map>
+
+/*
+
+Mergesort is a divide and conquer algorithm time O(nlogn)
+If both the left part and the right part of the array is sorted, then we merge them, we have the overall sorted
+You will have to make extra though.
+
+*/
+
+
 template <class T>
 static inline void merge(T* _array, T* _aux, int _lo, int _mi, int _hi)
 {
